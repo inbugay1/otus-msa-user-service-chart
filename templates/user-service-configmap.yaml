@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-configmap
+data:
+  LOG_LEVEL: "debug"
+  WRITE_DB_HOST: {{ .Release.Name }}-postgresql-hl
+  WRITE_DB_NAME: "users"
+  READ_DB_HOST: {{ .Release.Name }}-postgresql-hl
+  READ_DB_NAME: "users"

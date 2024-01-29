@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: createdb
+spec:
+  ttlSecondsAfterFinished: 120
+  template:
+    spec:
+      containers:
+        - name: createdb
+          image: bitnami/postgresql:latest
+          command: ["createdb"]
+          args: ["-h","{{ .Release.Name }}-postgresql", "-U", "postgres", "users"]
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-postgresql
+                  key: postgres-password
+      restartPolicy: Never
