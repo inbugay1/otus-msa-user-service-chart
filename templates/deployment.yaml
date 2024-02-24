@@ -48,3 +48,4 @@ spec:
                   key: postgres-password
           ports:
             - containerPort: {{ .Values.container.port }}
+            - containerPort: 9001

@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Release.Name }}-service
+  labels:
+    app: {{ .Release.Name }}
 spec:
   selector:
     app: {{ .Release.Name }}
@@ -10,3 +12,8 @@ spec:
     - protocol: TCP
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.container.port }}
+      name: api
+    - protocol: TCP
+      port: 9001
+      targetPort: 9001
+      name: metrics
